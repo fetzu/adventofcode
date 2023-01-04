@@ -19,7 +19,7 @@ x = 0
 y = 0
 for tree in seert:
     #print(f"Tree is {tree} at position x:{x} y:{y}")
-    forest[x][y] = tree
+    forest[y][x] = tree
     if x >= forestsize - 1:
         y += 1
         x = 0
