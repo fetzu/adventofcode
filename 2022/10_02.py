@@ -1,4 +1,4 @@
-# AoC 2022, Day 1: Private Screen(ing) // Part 2
+# AoC 2022, Day 10: Private Screen(ing) // Part 2
 
 f = open("10_data.txt","r")
 instructions = f.readlines()

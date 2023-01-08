@@ -1,4 +1,4 @@
-# AoC 2022, Day 1: Single Register // Part 1
+# AoC 2022, Day 10: Single Register // Part 1
 
 f = open("10_data.txt","r")
 instructions = f.readlines()
