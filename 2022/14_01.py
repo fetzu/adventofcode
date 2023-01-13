@@ -2,7 +2,7 @@
 
 # Recusions are fun and should be unlimited. Plus my MacBook has a lot of RAM !
 import sys
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(1000000)
 
 # Let's see what's going on with those seg faults...
 import faulthandler
@@ -14,7 +14,7 @@ stratae = []
 
 #r = open("14_result.txt", "w")
 
-def renderwall(wall, savefile=False):
+def renderwall(wall, savefile=True):
     if savefile is True:
         open('14_result.txt', 'w').close()
         r = open("14_result.txt", "w")
@@ -66,10 +66,11 @@ for line in lines:
         x.append(int(pair[1]))
 minx, maxx = min(x), max(x)
 miny, maxy = min(y), max(y)
-if minx > 0: minx = 0 # Fix the size of array to have starting points with coordinated (500, 0) inside
+if minx > 0: minx = 0 # Fix the size of array to have starting points with coordinates (500, 0) inside
 offsety = 500 - miny + 1 # Find out the "offety" to be use to set y to 500 later...
 lenx, leny = maxx-minx, maxy-miny
 #print(minx, maxx, miny, maxy)
+lines = 0
 
 # Generate an empty wall (of sound!) with 1 extra line (our abyss) and 2 extra columns (the fall to abyss)
 thewall = [["." for y in range(leny+3)] for x in range(lenx+2)]
@@ -86,7 +87,7 @@ for y in range(len(stratae)):
         #print(f"passing: {lstartx}, {lstarty}, {lendx}, {lendy} @ {y}:{x}")
         #print("\n")
         drawrocks(lstartx, lstarty, lendx, lendy, thewall)
-
+stratae = 0
 # Draw the fire at the bottom (of hell!)
 for i in range(len(thewall[1])):
     thewall[-1][i] = "§"
@@ -103,6 +104,7 @@ def sandstrafe(wall, x, y, poststrafe=False):
         #print(f"Poststrafe: {x+1}:{y-1} | Origin: 0:{offsety}")
         sanddrop(wall, x+1, y-1)
     elif wall[x+1][y+1] == ".":
+        #renderwall(wall)
         wall[x][y] = "."
         wall[x+1][y+1] = "o"
         #print("Poststrafe")
@@ -125,6 +127,11 @@ def sanddrop(wall, x, y, resety=False):
     # Spot down is not free...
     elif wall[x+1][y] == "#" or wall[x+1][y] == "o" or wall[x+1][y] == "§" or wall[x+1][y] == "~":
         # alt: move diagonally
+        open('14_lastpos.txt', 'w').close()
+        lp = open("14_lastpos.txt", "w")
+        lp.write(str(x))
+        lp.write("\n")
+        lp.write(str(y))
         if wall[x+1][y-1] == "." or wall[x+1][y+1] == ".":
             #print("Can Move Diagonally")
             sandstrafe(wall, x, y)
