@@ -73,8 +73,8 @@ lenx, leny = maxx-minx, maxy-miny
 lines = 0
 
 # Generate an empty wall (of sound!) with 1 extra line (our abyss) and 2 extra columns (the fall to abyss)
-thewall = [["." for y in range(leny+3)] for x in range(lenx+2)]
-#renderwall(thewall)
+thewall = [["." for y in range(leny+5)] for x in range(lenx+2)]
+renderwall(thewall)
 
 # Draw the rocks on the wall !
 for y in range(len(stratae)):
@@ -162,4 +162,4 @@ dropsand(thewall, offsety)
 print("Final wall:")
 renderwall(thewall)
 
-print(sum([i.count("o") for i in thewall])-1)
+print(sum([i.count("o") for i in thewall]))
